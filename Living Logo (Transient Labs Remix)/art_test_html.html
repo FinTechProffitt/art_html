@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: #282828;
+}
+
+#art {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="art">
+  <img id="artImage" src="" alt="Art">
+</div>
+
+<script>
+function updateArt() {
+  $.get("https://blockchain.info/q/getblockcount", function(data, status){
+    let blockHeight = data;
+    // Now you can use the blockHeight as a parameter in your art
+    // For example, you can display a different JPG file based on the block height
+    let fileNumber = blockHeight % 11; // Change 11 to the number of JPG files you have
+    $("#artImage").attr("src", "art" + fileNumber + ".jpg");
+  });
+}
+
+$(document).ready(function(){
+  updateArt(); // Update the art when the page loads
+  setInterval(updateArt, 10 * 60 * 1000); // Update the art every 10 seconds
+});
+</script>
+
+</body>
+</html>
