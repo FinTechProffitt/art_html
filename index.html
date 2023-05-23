@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bitcoin Blockheight Dynamic Homepage</title>
+  <style>
+    body {
+      background: url('images/default.jpg') no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      transition: background-image 0.5s ease-in-out;
+    }
+
+    .blur {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      overflow: hidden;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .blur:before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: inherit;
+      filter: blur(10px);
+    }
+
+    .button-container {
+      position: relative;
+      z-index: 3;
+    }
+
+    .button {
+      display: inline-block;
+      margin: 20px;
+      padding: 10px 20px;
+      background-color: #000;
+      color: #fff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="blur"></div>
+  <div class="button-container">
+    <a class="button" href="https://twitter.com" target="_blank">Twitter</a>
+    <a class="button" href="https://linkedin.com" target="_blank">LinkedIn</a>
+    <a class="button" href="https://opensea.io" target="_blank">OpenSea</a>
+  </div>
+
+  <script>
+    // This is just a sample code, you would need to replace it with the API endpoint provided by your server
+    setInterval(() => {
+      fetch('https://your-server.com/api/blockheight')
+        .then(response => response.json())
+        .then(data => {
+          const blockHeight = data.blockHeight;
+          document.body.style.backgroundImage = `url('images/${blockHeight}.jpg')`;
+        })
+        .catch(err => console.error(err));
+    }, 10 * 60 * 1000);
+  </script>
+</body>
+</html>
